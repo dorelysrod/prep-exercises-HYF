@@ -3,13 +3,23 @@ import { v4 as uuidv4 } from 'uuid';
 
 const seedData = async () => {
   try {
+    const units = [
+      { id: uuidv4(), name: 'grams' },
+      { id: uuidv4(), name: 'cups' },
+      { id: uuidv4(), name: 'tablespoons' },
+      { id: uuidv4(), name: 'pieces' }
+    ];
+
+    for (const unit of units) {
+      await db.query('INSERT INTO units (id, name) VALUES (?, ?)', [unit.id, unit.name]);
+    }
+
     const categories = [
       { id: uuidv4(), name: 'Japanese' },
       { id: uuidv4(), name: 'Cake' },
       { id: uuidv4(), name: 'Vegetarian' },
-      { id: uuidv4(), name: 'No-Bake' },        
-      { id: uuidv4(), name: 'Vegan' },          
-      { id: uuidv4(), name: 'Gluten-Free' },    
+      { id: uuidv4(), name: 'No-Bake' },
+      { id: uuidv4(), name: 'Vegan' }
     ];
 
     for (const category of categories) {
@@ -18,12 +28,7 @@ const seedData = async () => {
 
     const recipes = [
       { id: uuidv4(), name: 'Sushi', description: 'Sushi with fresh fish and rice.', categoryId: categories[0].id },
-      { id: uuidv4(), name: 'Cheesecake', description: 'Creamy cheesecake with a graham cracker crust.', categoryId: categories[1].id },
-      { id: uuidv4(), name: 'Vegetable Stir Fry', description: 'A healthy mix of vegetables stir-fried with soy sauce.', categoryId: categories[2].id },
-      { id: uuidv4(), name: 'No-Bake Cheesecake', description: 'A quick and easy cheesecake that doesn’t require baking.', categoryId: categories[3].id }, 
-      { id: uuidv4(), name: 'Roasted Brussels Sprouts', description: 'Delicious roasted Brussels sprouts with a crispy finish.', categoryId: categories[4].id }, 
-      { id: uuidv4(), name: 'Mac & Cheese', description: 'Classic mac and cheese with cheddar.', categoryId: categories[2].id }, 
-      { id: uuidv4(), name: 'Tamagoyaki Japanese Omelette', description: 'A sweet and savory Japanese omelette.', categoryId: categories[0].id }, 
+      { id: uuidv4(), name: 'Cheesecake', description: 'Creamy cheesecake with a graham cracker crust.', categoryId: categories[1].id }
     ];
 
     for (const recipe of recipes) {
@@ -34,19 +39,7 @@ const seedData = async () => {
     const ingredients = [
       { id: uuidv4(), name: 'Rice' },
       { id: uuidv4(), name: 'Fish' },
-      { id: uuidv4(), name: 'Cheese' },
-      { id: uuidv4(), name: 'Vegetables' },
-      { id: uuidv4(), name: 'Soy Sauce' },
-      { id: uuidv4(), name: 'Condensed milk' },  
-      { id: uuidv4(), name: 'Cream Cheese' },    
-      { id: uuidv4(), name: 'Lemon Juice' },     
-      { id: uuidv4(), name: 'Pie Crust' },       
-      { id: uuidv4(), name: 'Cherry Jam' },      
-      { id: uuidv4(), name: 'Brussels Sprouts' }, 
-      { id: uuidv4(), name: 'Macaroni' },        
-      { id: uuidv4(), name: 'Butter' },          
-      { id: uuidv4(), name: 'Eggs' },            
-      { id: uuidv4(), name: 'Sugar' },         
+      { id: uuidv4(), name: 'Cream Cheese' }
     ];
 
     for (const ingredient of ingredients) {
@@ -55,23 +48,38 @@ const seedData = async () => {
 
     const steps = [
       { id: uuidv4(), description: 'Cook rice.' },
-      { id: uuidv4(), description: 'Add fresh fish.' },
-      { id: uuidv4(), description: 'Mix vegetables with soy sauce.' },
-      { id: uuidv4(), description: 'Beat Cream Cheese.' }, 
-      { id: uuidv4(), description: 'Add condensed milk and blend.' }, 
-      { id: uuidv4(), description: 'Spread the Cherry Jam.' }, 
-      { id: uuidv4(), description: 'Preheat the oven.' },      
-      { id: uuidv4(), description: 'Mix ingredients in a bowl.' }, 
-      { id: uuidv4(), description: 'Cook Macaroni for 8 minutes.' }, 
-      { id: uuidv4(), description: 'Beat the eggs.' }, 
+      { id: uuidv4(), description: 'Add fresh fish.' }
     ];
 
     for (const step of steps) {
       await db.query('INSERT INTO steps (id, description) VALUES (?, ?)', [step.id, step.description]);
     }
 
+    const recipeIngredients = [
+      {
+        id: uuidv4(),
+        recipe_id: recipes[0].id,
+        ingredient_id: ingredients[0].id,
+        quantity: 200,
+        unit_id: units[0].id
+      },
+      {
+        id: uuidv4(),
+        recipe_id: recipes[0].id,
+        ingredient_id: ingredients[1].id,
+        quantity: 2,
+        unit_id: units[3].id
+      }
+    ];
 
-    console.log('Data seeded successfully.');
+    for (const recipeIngredient of recipeIngredients) {
+      await db.query(
+        'INSERT INTO recipe_ingredients (id, recipe_id, ingredient_id, quantity, unit_id) VALUES (?, ?, ?, ?, ?)',
+        [recipeIngredient.id, recipeIngredient.recipe_id, recipeIngredient.ingredient_id, recipeIngredient.quantity, recipeIngredient.unit_id]
+      );
+    }
+
+    console.log('Data seeded successfully with normalized structure.');
   } catch (error) {
     console.error('Error seeding data:', error);
   } finally {
