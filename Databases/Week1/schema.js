@@ -21,13 +21,13 @@ const createDatabaseAndTables = async () => {
       {
         query: `CREATE TABLE IF NOT EXISTS Category (
                   id INT AUTO_INCREMENT PRIMARY KEY,
-                  name VARCHAR(255) NOT NULL
+                  name VARCHAR(255) UNIQUE NOT NULL
                 )`, 
         table: 'Category'
       },
       {
         query: `CREATE TABLE IF NOT EXISTS RecipeCategory (
-                  recipe_id INT,
+                  recipe_id INT NOT NULL,
                   category_id INT,
                   FOREIGN KEY (recipe_id) REFERENCES Recipe(id),
                   FOREIGN KEY (category_id) REFERENCES Category(id),
@@ -44,8 +44,8 @@ const createDatabaseAndTables = async () => {
       },
       {
         query: `CREATE TABLE IF NOT EXISTS RecipeIngredient (
-                  recipe_id INT,
-                  ingredient_id INT,
+                  recipe_id INT NOT NULL,
+                  ingredient_id INT NOT NULL,
                   quantity VARCHAR(50),
                   unit VARCHAR(50),
                   FOREIGN KEY (recipe_id) REFERENCES Recipe(id),
@@ -63,11 +63,11 @@ const createDatabaseAndTables = async () => {
       },
       {
         query: `CREATE TABLE IF NOT EXISTS RecipeStep (
-                  recipe_id INT,
-                  step_id INT,
-                  step_order INT,
-                  FOREIGN KEY (recipe_id) REFERENCES Recipe(id),
-                  FOREIGN KEY (step_id) REFERENCES Step(id),
+                  recipe_id INT NOT NULL,
+                  step_id INT NOT NULL,
+                  step_order INT NOT NULL,
+                  FOREIGN KEY (recipe_id) REFERENCES Recipe(id) ON DELETE CASCADE,
+                  FOREIGN KEY (step_id) REFERENCES Step(id) ON DELETE CASCADE,
                   PRIMARY KEY (recipe_id, step_id)
                 )`, 
         table: 'RecipeStep'
