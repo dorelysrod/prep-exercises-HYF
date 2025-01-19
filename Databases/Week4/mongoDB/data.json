@@ -1,0 +1,51 @@
+{
+    "categories": [
+      "Japanese", "Cake", "Vegetarian", "Vegan", "Gluten-Free"
+    ],
+    "recipes": [
+      {
+        "name": "Matcha Cheesecake",
+        "description": "A creamy and rich cheesecake with the earthy flavor of matcha.",
+        "categories": ["Cake", "Japanese"],
+        "ingredients": [
+          { "name": "Cream Cheese", "quantity": "500", "unit": "grams" },
+          { "name": "Sugar", "quantity": "200", "unit": "grams" },
+          { "name": "Matcha Powder", "quantity": "2", "unit": "tablespoons" },
+          { "name": "Eggs", "quantity": "3", "unit": "large" },
+          { "name": "Heavy Cream", "quantity": "200", "unit": "ml" },
+          { "name": "Graham Crackers", "quantity": "200", "unit": "grams" },
+          { "name": "Butter", "quantity": "100", "unit": "grams" }
+        ],
+        "steps": [
+          "Preheat oven to 325°F (160°C).",
+          "Crush graham crackers and mix with melted butter to form a crust.",
+          "Press crust into a springform pan and bake for 10 minutes.",
+          "Mix cream cheese, sugar, and matcha powder until smooth.",
+          "Add eggs one at a time, then mix in heavy cream.",
+          "Pour filling onto crust and bake for 50 minutes.",
+          "Let cool and refrigerate before serving."
+        ]
+      },
+      {
+        "name": "No-Bake Cheesecake",
+        "description": "A delicious no-bake cheesecake with a creamy filling.",
+        "categories": ["Cake", "Vegetarian", "No-Bake"],
+        "ingredients": [
+          { "name": "Cream Cheese", "quantity": "400", "unit": "grams" },
+          { "name": "Condensed Milk", "quantity": "300", "unit": "grams" },
+          { "name": "Lemon Juice", "quantity": "3", "unit": "tablespoons" },
+          { "name": "Pie Crust", "quantity": "1", "unit": "pack" },
+          { "name": "Cherry Jam", "quantity": "200", "unit": "grams" }
+        ],
+        "steps": [
+          "Beat Cream Cheese.",
+          "Add condensed milk and blend.",
+          "Add lemon juice and blend.",
+          "Add the mix to the pie crust.",
+          "Spread the cherry jam.",
+          "Place in the refrigerator for 3 hours."
+        ]
+      }
+    ]
+  }
+  
