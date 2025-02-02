@@ -1,0 +1,12 @@
+{
+  "name": "1-generate-random-person-details",
+  "version": "1.0.0",
+  "description": "Let's make a simple app by following a step by step approach to get a hang of API calls and testing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

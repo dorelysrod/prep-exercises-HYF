@@ -1,0 +1,19 @@
+.person-controller {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .get-person-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .get-person-btn:hover {
+    background-color: #0056b3;
+  }
+  
